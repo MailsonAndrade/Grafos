@@ -19,6 +19,14 @@ public class Grafo {
         vertices = new ArrayList<>();
     }
 
+    public int getOrdem() {
+        return vertices.size();
+    }
+
+    public int getTamanho() {
+        return arestas.size();
+    }
+
     public void adicionaVertices(String... nomes) {
         for (String nome : nomes) { //for-each
             vertices.add(new Vertice(nome));
@@ -39,6 +47,9 @@ public class Grafo {
         Vertice v2 = encontraVertice(nomeVertice2)
                 .orElseThrow(() -> new IllegalArgumentException("Vertice " + nomeVertice2 + " não encontrado."));
         infereSeGrafoEDirecionado(v1, v2);
+
+        v1.getAdjacencias().add(v2);
+        v2.getAdjacentes().add(v1);
         return nomeAresta.isEmpty() ? new Aresta(v1, v2) : new Aresta(nomeAresta, v1, v2);
     }
 
@@ -87,8 +98,10 @@ public class Grafo {
         return """
                 Grafo{
                    direcionado = %s,
+                   ordem = %d,
+                   tamanho = %d,
                    vertices = %s,
                    arestas = %s
-                }""".formatted(eDirigido ? "sim" : "não", vertices, arestas);
+                }""".formatted(eDirigido ? "sim" : "não", getOrdem(), getTamanho(), vertices, arestas);
     }
 }
