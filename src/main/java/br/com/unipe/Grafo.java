@@ -28,7 +28,7 @@ public class Grafo {
     }
 
     public void adicionaVertices(String... nomes) {
-        for (String nome : nomes) { //for-each
+        for (String nome : nomes) {
             vertices.add(new Vertice(nome));
         }
     }
@@ -54,11 +54,11 @@ public class Grafo {
     }
 
     private void infereSeGrafoEDirecionado(Vertice v1, Vertice v2) {
-        if (!eDirigido) { //eDirigido == false
+        if (!eDirigido) {
             if (eSelfLoop(v1, v2)) {
                 eDirigido = true;
             } else {
-                for (Aresta aresta : arestas) { //for-each
+                for (Aresta aresta : arestas) {
                     if (eViaMaoDupla(v1, v2, aresta)) {
                         eDirigido = true;
                         break;

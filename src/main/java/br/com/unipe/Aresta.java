@@ -12,7 +12,6 @@ public class Aresta {
     private Vertice verticeOrigem;
     private Vertice verticeDestino;
 
-    //Construtor para arestas sem nome
     public Aresta(Vertice v1, Vertice v2) {
         this.verticeOrigem = v1;
         this.verticeDestino = v2;
