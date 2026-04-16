@@ -92,6 +92,65 @@ public class Grafo {
         }
         return Optional.empty();
     }
+    //
+    public void exibeMatrizAdjacencia() {
+        int n = vertices.size();
+        int[][] matriz = new int[n][n];
+
+        for (Aresta aresta : arestas) {
+            int i = vertices.indexOf(aresta.getVerticeOrigem());
+            int j = vertices.indexOf(aresta.getVerticeDestino());
+            matriz[i][j] = 1;
+
+            if (!eDirigido) {
+                matriz[j][i] = 1;
+            }
+        }
+
+        System.out.println("\nMatriz de Adjacência:");
+        imprimeMatriz(matriz, true);
+    }
+
+    public void exibeMatrizIncidencia() {
+        int n = vertices.size();
+        int m = arestas.size();
+        int[][] matriz = new int[n][m];
+
+        for (int j = 0; j < m; j++) {
+            Aresta aresta = arestas.get(j);
+            int vOrigem = vertices.indexOf(aresta.getVerticeOrigem());
+            int vDestino = vertices.indexOf(aresta.getVerticeDestino());
+
+            if (eDirigido) {
+                matriz[vOrigem][j] = -1;
+                matriz[vDestino][j] = 1;
+                if (vOrigem == vDestino) matriz[vOrigem][j] = 2;
+            } else {
+                matriz[vOrigem][j] = 1;
+                matriz[vDestino][j] = 1;
+            }
+        }
+
+        System.out.println("\nMatriz de Incidência:");
+        imprimeMatriz(matriz, false);
+    }
+
+    private void imprimeMatriz(int[][] matriz, boolean isAdjacencia) {
+        System.out.print("    ");
+        for (int i = 0; i < (isAdjacencia ? vertices.size() : arestas.size()); i++) {
+            System.out.printf("%-3s", isAdjacencia ? vertices.get(i).getNome() : "A" + i);
+        }
+        System.out.println();
+
+        for (int i = 0; i < vertices.size(); i++) {
+            System.out.printf("%-3s|", vertices.get(i).getNome());
+            for (int j = 0; j < matriz[i].length; j++) {
+                System.out.printf("%-3d", matriz[i][j]);
+            }
+            System.out.println();
+        }
+    }
+    //
 
     @Override
     public String toString() {

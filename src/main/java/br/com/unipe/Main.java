@@ -14,5 +14,7 @@ public class Main {
         grafo.addAresta("4", "5");
 
         System.out.println(grafo);
+        grafo.exibeMatrizAdjacencia();
+        grafo.exibeMatrizIncidencia();
     }
 }
